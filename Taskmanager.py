@@ -6,7 +6,8 @@ while True:
 2 Delete Task
 3 Show All Task
 4 Commit Task
-5 Exit""")
+5 Edit Task
+6 Exit""")
         choose=int(input("Option Select (1,2,3,4,5) : "))
         match choose:
             case 1:
@@ -22,6 +23,9 @@ while True:
                 print("--------Commit Task--------")
                 ft.taskcommit()
             case 5:
+                print("--------Edit Task--------")
+                ft.taskedit()
+            case 6:
                 print("--------Exit--------")
                 break
 
