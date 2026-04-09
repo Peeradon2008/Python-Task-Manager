@@ -5,7 +5,7 @@ while True:
         print("""1 Add Task
 2 Delete Task
 3 Show All Task
-4 Show Task Status5
+4 Commit Task
 5 Exit""")
         choose=int(input("Option Select (1,2,3,4,5) : "))
         match choose:
@@ -27,5 +27,5 @@ while True:
 
     except ValueError:
         print("---------------------------------------")
-        print("There is no option in this task manager")
+        print("No that option in this task manager")
         print("---------------------------------------")
