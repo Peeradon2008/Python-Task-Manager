@@ -1,10 +1,11 @@
 import json
 from os import path
-
+with open("D:/Github Repo/Python-Task-Manager/task.json") as f:
+    data=json.load(f)       #<-- ดึงข้อมูลใน Json มาเก็บไว้ใน Data
 
 def addtask():
     task={}
-    
+    global data
     #ใส่ข้อมูล task ที่จะเพิ่ม ใน dict
     task_name=input("Task Name : ")
     task_des =input(f"{task_name} Description : ")
@@ -21,8 +22,6 @@ def addtask():
             """ข้อมูลถูกเก็บใน Json file แล้ว"""
     
     else: #กรณีที่ file ถูกสร้างแล้ว (เคยใช้)
-        with open("D:/Github Repo/Python-Task-Manager/task.json") as f:
-            data=json.load(f)       #<-- ดึงข้อมูลใน Json มาเก็บไว้ใน Data
         data.update({task_name:task})     #update ข้อมูลใหม่ใน list Data
 
         with open ("D:/Github Repo/Python-Task-Manager/task.json",'w') as f:
@@ -32,8 +31,7 @@ def addtask():
 """--------------------------------------------------------------------------------------------------"""
 def deletetask():   
     try:    
-        with open("D:/Github Repo/Python-Task-Manager/task.json") as f:
-            data=json.load(f)
+        global data
         task_name=input("Task name : ")
         if task_name in data:
             del data[task_name]
@@ -52,9 +50,7 @@ Name:"{task_name}" Not Exist""")
 """--------------------------------------------------------------------------------------------------"""
 def showtask():
     count=0
-
-    with open("D:/Github Repo/Python-Task-Manager/task.json") as f:
-        data=json.load(f)   #<-- ดึงข้อมูลใน Json มาเก็บไว้ใน Data
+    global data
     
     for task in data.values(): #show ข้อมูล ทั้งหมด
         count+=1
@@ -68,8 +64,7 @@ completed: {task["completed"]}""")
 """--------------------------------------------------------------------------------------------------"""
 def taskcommit():
     try:    
-        with open("D:/Github Repo/Python-Task-Manager/task.json") as f:
-            data=json.load(f)   #<-- ดึงข้อมูลใน Json มาเก็บไว้ใน Data
+        global data
         task_name=input("Task name : ")
         if task_name in data:
             data[task_name].update({"completed":True})
@@ -85,3 +80,6 @@ def taskcommit():
         print(f"""Can't Commit Task
 Name:"{task_name}" Not Exist""")
         print("---------------------------------------")
+
+def taskedit():
+    pass
