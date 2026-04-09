@@ -11,7 +11,7 @@ def addtask():
     task["name"]=task_name          #task.update({"name":task_name})
     task["description"]=task_des    #task.update({"description":task_des})
     task["completed"]=False            #task.update({"completed":False})
-    print("Task Added...")
+    print("Task Added...\n")
 
     if not path.exists("D:/Github Repo/Python-Task-Manager/task.json"):   #กรณี file ยังไม่เคยถูกสร้าง (ไม่เคยใช้)
         user={}
@@ -28,10 +28,28 @@ def addtask():
         with open ("D:/Github Repo/Python-Task-Manager/task.json",'w') as f:
             json.dump(data,f,indent=2) 
             """Rewrite Json file ด้วยข้อมูลที่ update แล้ว"""
-"""--------------------------------------------------------------------------------------------------"""
-def deletetask():
-    pass
 
+"""--------------------------------------------------------------------------------------------------"""
+def deletetask():   
+    try:    
+        with open("D:/Github Repo/Python-Task-Manager/task.json") as f:
+            data=json.load(f)
+        task_name=input("Task name : ")
+        if task_name in data:
+            del data[task_name]
+            with open("D:/Github Repo/Python-Task-Manager/task.json",'w') as f:
+                json.dump(data,f,indent=2)
+            print("Task Deleted...\n")
+        else:
+            raise Exception("Error :Task Name Not Found")
+    except Exception:
+        print("---------------------------------------")
+        print(f"""Can't Delete Task
+Name:"{task_name}" Not Exist""")
+        print("---------------------------------------")
+
+
+"""--------------------------------------------------------------------------------------------------"""
 def showtask():
     count=0
 
@@ -47,7 +65,23 @@ completed: {task["completed"]}""")
         print('--------------------------------------------------')
     count=0 
 
+"""--------------------------------------------------------------------------------------------------"""
 def taskcommit():
-    with open("D:/Github Repo/Python-Task-Manager/task.json") as f:
-        data=json.load(f)   #<-- ดึงข้อมูลใน Json มาเก็บไว้ใน Data
-    
+    try:    
+        with open("D:/Github Repo/Python-Task-Manager/task.json") as f:
+            data=json.load(f)   #<-- ดึงข้อมูลใน Json มาเก็บไว้ใน Data
+        task_name=input("Task name : ")
+        if task_name in data:
+            data[task_name].update({"completed":True})
+            with open("D:/Github Repo/Python-Task-Manager/task.json",'w') as f:
+                json.dump(data,f,indent=2)
+            print("Task Commit...\n")
+
+        else:
+            raise Exception("Error : Task Not Found")
+
+    except Exception:
+        print("---------------------------------------")
+        print(f"""Can't Commit Task
+Name:"{task_name}" Not Exist""")
+        print("---------------------------------------")
