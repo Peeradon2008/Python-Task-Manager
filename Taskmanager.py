@@ -43,7 +43,7 @@ or Type Exit""")
             case _:
                 raise Exception
 
-    except ZeroDivisionError:
+    except Exception:
         print("---------------------------------------")
         print("No that option in this task manager")
         print("---------------------------------------")
