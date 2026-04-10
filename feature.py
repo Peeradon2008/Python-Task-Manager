@@ -9,7 +9,6 @@ def addtask(data,found):
     task["name"]=task_name          #task.update({"name":task_name})
     task["description"]=task_des    #task.update({"description":task_des})
     task["completed"]=False            #task.update({"completed":False})
-    print("Task Added...\n")
 
     if found:   #กรณีที่ file ถูกสร้างแล้ว (เคยใช้)
         data.update({task_name:task})     #update ข้อมูลใหม่ใน list Data
@@ -23,6 +22,7 @@ def addtask(data,found):
         with open("D:/Github Repo/Python-Task-Manager/task.json",'a') as f:
             json.dump(user,f,indent=2)          #<-- แปลงและเก็บข้อมูลให้เป็น Json object+array
             """ข้อมูลถูกเก็บใน Json file แล้ว"""
+    print("Task Added...\n")
 
 """--------------------------------------------------------------------------------------------------"""
 def deletetask(data):   
@@ -99,6 +99,7 @@ def taskedit(data):
                     print(f"Complete Status updated to {data[task_name]["completed"]}")
             with open("D:/Github Repo/Python-Task-Manager/task.json",'w') as f:
                     json.dump(data,f,indent=2)
+            print("Task Edited...\n")
         else:
             raise ex.TaskNotFoundError("Error : Task Not Found")
     except ex.TaskNotFoundError:
