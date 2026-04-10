@@ -4,7 +4,7 @@ from os import path
 import exception as ex
 while True:
     try:
-        file_found=path.exists("D:/Github Repo/Python-Task-Manager/task.json")
+        file_found=path.exists(ft.json_file)
         print("---------Task Manager---------")
         if file_found:
             print("""  -------Choose Option-------
@@ -14,7 +14,7 @@ while True:
 4 Commit Task
 5 Edit Task
 6 Exit""")
-            with open("D:/Github Repo/Python-Task-Manager/task.json") as f:
+            with open(ft.json_file) as f:
                 data = load(f)
         else:
             data=None
