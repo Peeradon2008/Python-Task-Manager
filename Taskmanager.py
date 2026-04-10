@@ -21,7 +21,7 @@ while True:
             print("""Choose Option
 1 Add Task
 or Type Exit""")
-        choose=(input("Option Select (Number or Exit) : "))
+        choose=(input("Option Select (Number or Type Exit) : "))
         match choose,file_found:
             case '1',True|False:
                 print("--------Add Task--------")
