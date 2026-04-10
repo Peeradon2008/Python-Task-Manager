@@ -1,4 +1,5 @@
 import json
+import exception as ex
 
 def addtask(data,found):
     task={}
@@ -33,8 +34,8 @@ def deletetask(data):
                 json.dump(data,f,indent=2)
             print("Task Deleted...\n")
         else:
-            raise Exception("Error :Task Not Found")
-    except Exception:
+            raise ex.TaskNotFoundError("Error :Task Not Found")
+    except ex.TaskNotFoundError:
         print("---------------------------------------")
         print(f"""Can't Delete Task
 Name:"{task_name}" Not Exist""")
@@ -65,9 +66,9 @@ def taskcommit(data):
             print("Task Commit...\n")
 
         else:
-            raise Exception("Error : Task Not Found")
+            raise ex.TaskNotFoundError("Error : Task Not Found")
 
-    except Exception:
+    except ex.TaskNotFoundError:
         print("---------------------------------------")
         print(f"""Can't Commit Task
 Name:"{task_name}" Not Exist""")
@@ -98,8 +99,8 @@ def taskedit(data):
             with open("D:/Github Repo/Python-Task-Manager/task.json",'w') as f:
                     json.dump(data,f,indent=2)
         else:
-            raise Exception("Error : Task Not Found")
-    except Exception:
+            raise ex.TaskNotFoundError("Error : Task Not Found")
+    except ex.TaskNotFoundError:
         print("---------------------------------------")
         print(f"""Can't Edit Task
 Name:"{task_name}" Not Exist""")

@@ -1,6 +1,7 @@
 import feature as ft
 from json import load
 from os import path
+import exception as ex
 while True:
     try:    
         file_found=path.exists("D:/Github Repo/Python-Task-Manager/task.json")
@@ -41,9 +42,9 @@ or Type Exit""")
                 print("--------Exit--------")
                 break
             case _:
-                raise Exception
+                raise ex.OptionError(f"No >{choose}< option in this task manager")
 
-    except Exception:
+    except ex.OptionError as e:
         print("---------------------------------------")
-        print("No that option in this task manager")
+        print(e)
         print("---------------------------------------")
