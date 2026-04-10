@@ -33,7 +33,7 @@ def deletetask(data):
                 json.dump(data,f,indent=2)
             print("Task Deleted...\n")
         else:
-            raise Exception("Error :Task Name Not Found")
+            raise Exception("Error :Task Not Found")
     except Exception:
         print("---------------------------------------")
         print(f"""Can't Delete Task
@@ -74,4 +74,33 @@ Name:"{task_name}" Not Exist""")
         print("---------------------------------------")
 
 def taskedit(data):
-    pass
+    try:    
+        task_name=input("Task name : ")
+        if task_name in data:
+            print("""Choose what you want to edit
+    1 name
+    2 description
+    3 completed status""")
+            edit=int(input("Edit Option : "))
+            match edit:
+                case 1:
+                    new_name = input("New Name : ")
+                    data[task_name].update({"name":new_name})
+                    data[new_name]=data.pop(task_name)
+                    print(f"Name updated to {data[new_name]["name"]}")
+                case 2:
+                    new_des = input("New Description : ")
+                    data[task_name].update({"description":new_des})
+                    print(f"Description updated to {data[task_name]["description"]}")
+                case 3:
+                    data[task_name].update({"completed":False})
+                    print(f"Complete Status updated to {data[task_name]["completed"]}")
+            with open("D:/Github Repo/Python-Task-Manager/task.json",'w') as f:
+                    json.dump(data,f,indent=2)
+        else:
+            raise Exception("Error : Task Not Found")
+    except Exception:
+        print("---------------------------------------")
+        print(f"""Can't Edit Task
+Name:"{task_name}" Not Exist""")
+        print("---------------------------------------")
