@@ -1,5 +1,4 @@
 import json
-from os import path
 
 def addtask(data,found):
     task={}
