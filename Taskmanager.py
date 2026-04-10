@@ -3,7 +3,7 @@ from json import load
 from os import path
 import exception as ex
 while True:
-    try:    
+    try:
         file_found=path.exists("D:/Github Repo/Python-Task-Manager/task.json")
         print("---------Task Manager---------")
         if file_found:
