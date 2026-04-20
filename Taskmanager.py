@@ -1,50 +1,77 @@
 import feature as ft
-from json import load
-from os import path
 import exception as ex
-while True:
+while True: 
     try:
-        file_found=path.exists(ft.json_file)
+        data=ft.Data().access()
         print("---------Task Manager---------")
-        if file_found:
-            print("""  -------Choose Option-------
+        match len(data):
+            case 0:
+                print("""  -------Choose Option-------
+1 Add Task
+-Exit""")
+            case x if x>0 :
+                print("""  -------Choose Option-------
 1 Add Task
 2 Delete Task
-3 Show All Task
+3 Search Task
 4 Commit Task
 5 Edit Task
 6 Exit""")
-            with open(ft.json_file) as f:
-                data = load(f)
-        else:
-            data=None
-            print("""Choose Option
-1 Add Task
-or Type Exit""")
         choose=(input("Option Select (Number or Type Exit) : "))
-        match choose,file_found:
-            case '1',True|False:
+        match choose,len(data):
+            case '1',x if x>=0:
                 print("--------Add Task--------")
-                ft.addtask(data,file_found)
-            case '2',True: 
+                feature = ft.Feature(input("Task name : "))
+                feature.addtask()
+            
+            case '2',x if x>0: 
                 print("--------Delete Task--------")
-                ft.deletetask(data)
-            case '3',True:
-                print("--------Show All Task--------")
-                ft.showtask(data)
-            case '4',True:
+                feature = ft.Feature(input("Task name : "))
+                feature.deletetask()
+            
+            case '3',x if x>0:
+                print("--------Search Task--------")
+                feature = ft.Feature(input("Task name : "))
+                feature.searchtask()
+            
+            case '4',x if x>0:
                 print("--------Commit Task--------")
-                ft.taskcommit(data)
-            case '5',True:
+                feature = ft.Feature(input("Task name : "))
+                feature.taskcommit()
+            
+            case '5',x if x>0:
                 print("--------Edit Task--------")
-                ft.taskedit(data)
-            case '6' | "Exit" | "exit",True|False:
+                feature = ft.Feature(input("Task name : "))
+                feature.taskedit()
+            
+            case '6'|"exit"|"Exit"|"EXIT",x if x>=0:
                 print("--------Exit--------")
                 break
-            case _:
-                raise ex.OptionError(f"No >{choose}< option in this task manager")
+            
+            case _,_:
+                raise ex.OptionError(f"No > {choose} < option in this task manager")
 
     except ex.OptionError as e:
+        print("---------------------------------------")
+        print(e)
+        print("---------------------------------------")
+    except ex.TaskNotFoundError as e:
+        print("---------------------------------------")
+        print(e)
+        print("---------------------------------------")
+    except ex.TaskDeleteError as e:
+        print("---------------------------------------")
+        print(e)
+        print("---------------------------------------")
+    except ex.TaskSearchError as e:
+        print("---------------------------------------")
+        print(e)
+        print("---------------------------------------")
+    except ex.TaskCommitError as e:
+        print("---------------------------------------")
+        print(e)
+        print("---------------------------------------")
+    except ex.TaskeditError as e:
         print("---------------------------------------")
         print(e)
         print("---------------------------------------")
