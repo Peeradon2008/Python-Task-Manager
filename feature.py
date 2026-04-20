@@ -1,13 +1,16 @@
 import json
 import exception as ex
 json_file="D:/Github Repo/Python-Task-Manager/task.json"
-
-class Feature:
-    def __init__(self, task_name):
+class Data:
+    def access(self):
         with open(json_file) as f:
             self.__data = json.load(f)
+            return self.__data
+class Feature(Data):
+    def __init__(self, task_name):
+        self.__data = super().access()
         self.__name = task_name
-
+    
     def savetask (self):
         with open(json_file,'w') as f:
             json.dump(self.__data,f,indent=2)
