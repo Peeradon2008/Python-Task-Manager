@@ -25,68 +25,66 @@ class Feature(Data):
         print("Task Added...\n")
     
     def deletetask(self):
-        if len(self.__data) == 0:
-            raise ex.TaskNotFoundError
-        else:
-            if self.__name in self.__data:
-                del self.__data[self.__name]
-                self.savetask()
-                print("Task Deleted...\n")
-            elif self.__name not in self.__data:
-                raise ex.TaskDeleteError
+        if self.__name in self.__data:
+            del self.__data[self.__name]
+            self.savetask()
+            print("Task Deleted...\n")
+        elif self.__name not in self.__data:
+            raise ex.TaskDeleteError(f"""---------Delete Failed---------
+Can't find task name {self.__name}""")
 
     def taskcommit(self):
-        if len(self.__data) == 0:
-            raise ex.TaskNotFoundError
-        else:
-            if self.__name in self.__data:
-                self.__data[self.__name].update({"completed":True})
-                self.savetask()
-                print("Task Commit...\n")
-            elif self.__name not in self.__data:
-                raise ex.TaskCommitError
+        if self.__name in self.__data:
+            self.__data[self.__name].update({"completed":True})
+            self.savetask()
+            print("Task Commit...\n")
+        elif self.__name not in self.__data:
+            raise ex.TaskCommitError(f"""---------Commit Failed---------
+Can't find task name {self.__name}""")
+    
+    def showalltask(self):
+        for task in self.__data.values():
+            print(f"name : {task["name"]}")
+            print(f"description : {task["description"]}")
+            print(f"completed : {task["completed"]}")
+            print("------------------------------------------")
 
     def searchtask(self):
-        if len(self.__data) == 0:
-            raise ex.TaskNotFoundError
-        else:
-            if self.__name in self.__data:
-                searched = self.__data[self.__name]
-                print(f"""----------------------------------------
-name : {searched["name"]}
-description : {searched["description"]}
-completed : {searched["completed"]}
-----------------------------------------""")
-            elif self.__name not in self.__data:
-                raise ex.TaskSearchError
+        if self.__name in self.__data:
+            searched = self.__data[self.__name]
+            print(f"----------------------------------------")
+            print(f"name : {searched["name"]}")
+            print(f"description : {searched["description"]}")
+            print(f"completed : {searched["completed"]}")
+            print("----------------------------------------")
+        elif self.__name not in self.__data:
+            raise ex.TaskSearchError(f"""---------Search Failed---------
+Can't find task name {self.__name}""")
             
     
     def taskedit(self):
-        if len(self.__data) == 0:
-            raise ex.TaskeditError
-        else:
-            if self.__name in self.__data:
-                print("""Choose what you want to edit
+        if self.__name in self.__data:
+            print("""Choose what you want to edit
 1 name
 2 description
 3 status""")
-                edit=int(input("Edit Option : "))
-                match edit:
-                    case 1:
-                        new_name = input("new name : ")
-                        self.__data[self.__name].update({"name":new_name})
-                        self.__data[new_name]=self.__data.pop(self.__name)
-
-                        self.__name = new_name
-                    case 2:
-                        new_des = input("new descriotion : ")
-                        self.__data[self.__name].update({"description":new_des})
-                    
-                    case 3:self.__data[self.__name].update({"completed":False})
-                self.savetask()
-                print("Task Edited...\n")
-            elif self.__name not in self.__data:
-                raise ex.TaskNotFoundError
+            edit=int(input("Edit Option : "))
+            match edit:
+                case 1:
+                    new_name = input("new name : ")
+                    self.__data[self.__name].update({"name":new_name})
+                    self.__data[new_name]=self.__data.pop(self.__name)
+                    self.__name = new_name
+                case 2:
+                    new_des = input("new descriotion : ")
+                    self.__data[self.__name].update({"description":new_des})
+                
+                case 3:self.__data[self.__name].update({"completed":False})
+            self.savetask()
+            print("Task Edited...\n")
+        elif self.__name not in self.__data:
+            raise ex.TaskNotFoundError(f"""---------Edit Failed---------
+Can't find task name {self.__name}""")
             
         
 
