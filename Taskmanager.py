@@ -19,41 +19,33 @@ while True:
 6 Edit Task
 7 Exit""")
         choose=(input("Option Select (Number or Type Exit) : "))
+        match choose:
+            case '1'|'2'|'3'|'5'|'6': feature = ft.Feature(input("Task name : "))
+            case '4':feature = ft.Feature("")
+            case '7'|"exit"|"Exit"|"EXIT": break
+            case _,_: raise ex.OptionError(f"No > {choose} < option in this task manager")
         match choose,len(data):
             case '1',x if x>=0:
                 print("--------Add Task--------")
-                feature = ft.Feature(input("Task name : "))
                 feature.addtask()
             
             case '2',x if x>0: 
                 print("--------Delete Task--------")
-                feature = ft.Feature(input("Task name : "))
                 feature.deletetask()
             
             case '3',x if x>0:
                 print("--------Search Task--------")
-                feature = ft.Feature(input("Task name : "))
                 feature.searchtask()
             case '4',x if x>0:
                 print("--------Show All Task--------")
-                feature = ft.Feature("")
                 feature.showalltask()
             case '5',x if x>0:
                 print("--------Commit Task--------")
-                feature = ft.Feature(input("Task name : "))
                 feature.taskcommit()
             
             case '6',x if x>0:
                 print("--------Edit Task--------")
-                feature = ft.Feature(input("Task name : "))
                 feature.taskedit()
-            
-            case '7'|"exit"|"Exit"|"EXIT",x if x>=0:
-                print("--------Exit--------")
-                break
-            
-            case _,_:
-                raise ex.OptionError(f"No > {choose} < option in this task manager")
 
     except ex.OptionError as e:
         print("---------------------------------------")
