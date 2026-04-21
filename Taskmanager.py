@@ -14,9 +14,10 @@ while True:
 1 Add Task
 2 Delete Task
 3 Search Task
-4 Commit Task
-5 Edit Task
-6 Exit""")
+4 Show All Task
+5 Commit Task
+6 Edit Task
+7 Exit""")
         choose=(input("Option Select (Number or Type Exit) : "))
         match choose,len(data):
             case '1',x if x>=0:
@@ -33,18 +34,21 @@ while True:
                 print("--------Search Task--------")
                 feature = ft.Feature(input("Task name : "))
                 feature.searchtask()
-            
             case '4',x if x>0:
+                print("--------Show All Task--------")
+                feature = ft.Feature("")
+                feature.showalltask()
+            case '5',x if x>0:
                 print("--------Commit Task--------")
                 feature = ft.Feature(input("Task name : "))
                 feature.taskcommit()
             
-            case '5',x if x>0:
+            case '6',x if x>0:
                 print("--------Edit Task--------")
                 feature = ft.Feature(input("Task name : "))
                 feature.taskedit()
             
-            case '6'|"exit"|"Exit"|"EXIT",x if x>=0:
+            case '7'|"exit"|"Exit"|"EXIT",x if x>=0:
                 print("--------Exit--------")
                 break
             
