@@ -13,7 +13,7 @@ class Data:
         with open(json_file) as f:
             self.__data = json.load(f)
             return self.__data
-class Feature(Data):
+class Feature(Data): #6 feature
     def __init__(self, task_name):
         self.__data = super().access()
         self.__name = task_name
@@ -22,7 +22,7 @@ class Feature(Data):
         with open(json_file,'w') as f:
             json.dump(self.__data,f,indent=2)
 
-    def addtask(self):
+    def addtask(self): #1
         task={}
         task["name"]=self.__name
         task["description"]=input(f"{self.__name} description : ")
@@ -31,7 +31,7 @@ class Feature(Data):
         self.savetask()
         print("Task Added...\n")
     
-    def deletetask(self):
+    def deletetask(self): #2
         if self.__name in self.__data:
             del self.__data[self.__name]
             self.savetask()
@@ -40,7 +40,7 @@ class Feature(Data):
             raise ex.TaskDeleteError(f"""---------Delete Failed---------
 Can't find task name {self.__name}""")
 
-    def taskcommit(self):
+    def taskcommit(self): #3
         if self.__name in self.__data:
             self.__data[self.__name].update({"completed":True})
             self.savetask()
@@ -49,14 +49,14 @@ Can't find task name {self.__name}""")
             raise ex.TaskCommitError(f"""---------Commit Failed---------
 Can't find task name {self.__name}""")
     
-    def showalltask(self):
+    def showalltask(self): #4
         for task in self.__data.values():
             print(f"name : {task["name"]}")
             print(f"description : {task["description"]}")
             print(f"completed : {task["completed"]}")
             print("------------------------------------------")
 
-    def searchtask(self):
+    def searchtask(self): #5
         if self.__name in self.__data:
             searched = self.__data[self.__name]
             print("----------------------------------------")
@@ -69,7 +69,7 @@ Can't find task name {self.__name}""")
 Can't find task name {self.__name}""")
             
     
-    def taskedit(self):
+    def taskedit(self): #6
         if self.__name in self.__data:
             print("""Choose what you want to edit
 1 name
@@ -93,6 +93,4 @@ Can't find task name {self.__name}""")
             raise ex.TaskNotFoundError(f"""---------Edit Failed---------
 Can't find task name {self.__name}""")
             
-        
-
 #----------------------------------End Class---------------------------------------#
