@@ -1,7 +1,14 @@
 import json
 import exception as ex
+from os import path
 json_file="D:/Github Repo/Python-Task-Manager/task.json"
 class Data:
+    def __init__(self):
+        if not path.exists(json_file):
+            space={}
+            with open(json_file,'x') as f:
+                json.dump(space,f)
+    
     def access(self):
         with open(json_file) as f:
             self.__data = json.load(f)
