@@ -52,7 +52,7 @@ Can't find task name {self.__name}""")
     def searchtask(self):
         if self.__name in self.__data:
             searched = self.__data[self.__name]
-            print(f"----------------------------------------")
+            print("----------------------------------------")
             print(f"name : {searched["name"]}")
             print(f"description : {searched["description"]}")
             print(f"completed : {searched["completed"]}")
