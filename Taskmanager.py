@@ -6,25 +6,14 @@ while True:
         Taskmanager=fr.Frontend().main()
         if Taskmanager==7:
             break
-
+            #Goal
+            #Test no file situation
+            #Test Error
     except ex.OptionError as e:
         print("---------------------------------------")
         print(e)
         print("---------------------------------------")
     
     except ex.TaskNotFoundError as e:
-        print(e)
-    
-    except ex.TaskDeleteError as e:
-        print(e)
-    
-    
-    except ex.TaskSearchError as e:
-        print(e)
-    
-    except ex.TaskCommitError as e:
-        print(e)
-    
-    except ex.TaskeditError as e:
         print(e)
         

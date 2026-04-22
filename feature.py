@@ -37,7 +37,7 @@ class Feature(Data): #6 feature
             self.savetask()
             print("Task Deleted...\n")
         elif self.__name not in self.__data:
-            raise ex.TaskDeleteError(f"""---------Delete Failed---------
+            raise ex.TaskNotFoundError(f"""---------Delete Failed---------
 Can't find task name {self.__name}""")
 
     def taskcommit(self): #3
@@ -46,7 +46,7 @@ Can't find task name {self.__name}""")
             self.savetask()
             print("Task Commit...\n")
         elif self.__name not in self.__data:
-            raise ex.TaskCommitError(f"""---------Commit Failed---------
+            raise ex.TaskNotFoundError(f"""---------Commit Failed---------
 Can't find task name {self.__name}""")
     
     def showalltask(self): #4
@@ -65,7 +65,7 @@ Can't find task name {self.__name}""")
             print(f"completed : {searched["completed"]}")
             print("----------------------------------------")
         elif self.__name not in self.__data:
-            raise ex.TaskSearchError(f"""---------Search Failed---------
+            raise ex.TaskNotFoundError(f"""---------Search Failed---------
 Can't find task name {self.__name}""")
             
     
@@ -87,6 +87,8 @@ Can't find task name {self.__name}""")
                     self.__data[self.__name].update({"description":new_des})
                 
                 case 3:self.__data[self.__name].update({"completed":False})
+                case _:
+                    raise ex.OptionError(f"No > {edit} < in this option")
             self.savetask()
             print("Task Edited...\n")
         elif self.__name not in self.__data:
