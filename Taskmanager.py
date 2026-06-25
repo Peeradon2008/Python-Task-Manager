@@ -3,12 +3,12 @@ import exception as ex
 while True: 
     try:
         print("---------Task Manager---------")
-        Taskmanager=fr.Frontend().main()
-        if Taskmanager==7:
+        exitcode=fr.main() #call frontend module
+        # and return exit code to exit program (break loop)
+        
+        if exitcode==7:
             break
-            #Goal
-            #Test no file situation
-            #Test Error
+
     except ex.OptionError as e:
         print("---------------------------------------")
         print(e)
