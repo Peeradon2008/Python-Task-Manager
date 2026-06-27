@@ -3,11 +3,14 @@ import exception as ex
 while True: 
     try:
         print("---------Task Manager---------")
-        exitcode=fr.main() #call frontend module
-        # and return exit code to exit program (break loop)
-        
-        if exitcode==7:
+        fr.showText()
+        option_selected = input("Option Select (Number or Type Exit) : ")
+        feature_option=fr.inputOption(option_selected)
+        if feature_option==7:
+            print("------------Exit Program------------")
             break
+        else:
+            fr.callFeature(option_selected,feature_option)
 
     except ex.OptionError as e:
         print("---------------------------------------")
