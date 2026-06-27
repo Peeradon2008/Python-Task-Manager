@@ -1,24 +1,22 @@
+# show text to tell user and call feature.py
 import feature as ft
-from exception import OptionError
-class Frontend:
-    def main(self):
-        self.__length=len(ft.Data().access())
-        self.text()
-        self.__choose = input("Option Select (Number or Type Exit) : ")
-        x=self.input()
-        if x == 7:
-            return x
-        else:
-            self.callfeature()
+from os import path
+import exception as ex
 
-    def text(self):
-        match self.__length:
-            case 0:
-                print("""  -------Choose Option-------
+data_length=len(ft.Accessjson().access()) #access json from feature.py
+
+def showText(): #show text
+
+    global data_length
+
+    # only use Addtask unless task data have stored
+    match data_length:
+        case 0:
+            print("""  -------Choose Option-------
 1 Add Task
 -Exit""")
-            case x if x>0 :
-                print("""  -------Choose Option-------
+        case x if x>0 :
+            print("""  -------Choose Option-------
 1 Add Task
 2 Delete Task
 3 Search Task
@@ -27,35 +25,49 @@ class Frontend:
 6 Edit Task
 7 Exit""")
 
-    def input(self):
-        match self.__choose:
-            case '1'|'2'|'3'|'5'|'6': self.feature = ft.Feature(input("Task name : "))
-            case '4':self.feature = ft.Feature("")
-            case '7'|"exit"|"Exit"|"EXIT":
-                return 7
-            case _: raise OptionError(f"No > {self.__choose} < option in this task manager")
+def inputOption(option_selected): #choose option to create object from feature class
     
-    def callfeature(self):
-        match self.__choose,self.__length:
-            case '1',x if x>=0:
-                print("--------Add Task--------")
-                self.feature.addtask()
-            
-            case '2',x if x>0: 
-                print("--------Delete Task--------")
-                self.feature.deletetask()
-            
-            case '3',x if x>0:
-                print("--------Search Task--------")
-                self.feature.searchtask()
-            case '4',x if x>0:
-                print("--------Show All Task--------")
-                self.feature.showalltask()
-            case '5',x if x>0:
-                print("--------Commit Task--------")
-                self.feature.taskcommit()
-            
-            case '6',x if x>0:
-                print("--------Edit Task--------")
-                self.feature.taskedit()
+    match option_selected:
+        case '1'|'2'|'3'|'5'|'6': #1) this option require taskname
+            feature = ft.Feature(input("Task name : ")) #input taskname
+            return feature
+        
+        case '4': #2) not require taskname
+            feature = ft.Feature(None)
+            return feature
+        
+        case '7'|"exit"|"Exit"|"EXIT": #3) exit
+            return 7 #return 7 exit code
+        
+        case _: raise ex.OptionError(f"No > {option_selected} < option in this task manager")
 
+def callFeature(option_selected,feature): #use task feature
+
+    global data_length
+
+    match option_selected,data_length:
+        case '1',x if x>=0: 
+            print("--------Add Task--------")
+            feature.addtask()
+        
+        case '2',x if x>0: #2-6 can use only unblank json file
+            print("--------Delete Task--------")
+            feature.deletetask()
+        
+        case '3',x if x>0:
+            print("--------Search Task--------")
+            feature.searchtask()
+        case '4',x if x>0:
+            print("--------Show All Task--------")
+            feature.showalltask()
+        case '5',x if x>0:
+            print("--------Commit Task--------")
+            feature.taskcommit()
+        
+        case '6',x if x>0:
+            print("--------Edit Task--------")
+            feature.taskedit()
+
+        case _: raise ex.OptionError(f"No > {option_selected} < option in this task manager")
+
+#----------------------------------End Function---------------------------------------#
