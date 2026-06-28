@@ -3,11 +3,7 @@ import feature as ft
 from os import path
 import exception as ex
 
-data_length=len(ft.Accessjson().access()) #access json from feature.py
-
-def showText(): #show text
-
-    global data_length
+def showText(data_length): #show text
 
     # only use Addtask unless task data have stored
     match data_length:
@@ -41,9 +37,7 @@ def inputOption(option_selected): #choose option to create object from feature c
         
         case _: raise ex.OptionError(f"No > {option_selected} < option in this task manager")
 
-def callFeature(option_selected,feature): #use task feature
-
-    global data_length
+def callFeature(option_selected,data_length,feature): #use task feature
 
     match option_selected,data_length:
         case '1',x if x>=0: 

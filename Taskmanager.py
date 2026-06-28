@@ -1,10 +1,14 @@
 import frontend as fr
+import feature as ft
 import exception as ex
 
 while True: 
     try:
         print("---------Task Manager---------")
-        fr.showText()
+
+        data_length = len(ft.Accessjson().access())
+
+        fr.showText(data_length)
         option_selected = input("Option Select (Number or Type Exit) : ")
         feature_option=fr.inputOption(option_selected)
 
@@ -12,7 +16,7 @@ while True:
             print("------------Exit Program------------")
             break
         else:
-            fr.callFeature(option_selected,feature_option)
+            fr.callFeature(option_selected,data_length,feature_option)
 
     except ex.OptionError as e:
         print("---------------------------------------")
