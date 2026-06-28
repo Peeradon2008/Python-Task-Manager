@@ -1,11 +1,11 @@
 import json
 import exception as ex
-from os import path
-json_file="taskstorage/task.json"
+import os
+json_file="task storage/task.json"
 
 class Accessjson:
     def __init__(self): #check everytime if Json not exist to prevent bug
-        if not path.exists(json_file):
+        if not os.path.exists(json_file):
             space={}
             with open(json_file,'x') as f:
                 json.dump(space,f)
