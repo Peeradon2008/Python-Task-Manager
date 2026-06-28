@@ -1,6 +1,5 @@
 # show text to tell user and call feature.py
 import feature as ft
-from os import path
 import exception as ex
 
 def showText(data_length): #show text
