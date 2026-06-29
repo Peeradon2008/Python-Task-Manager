@@ -11,7 +11,6 @@ while True:
         option_selected = input("Option Select (Number or Type Exit) : ")
         exitcode=fr.callFeature(option_selected,data_length)
 
-        print(exitcode)
         if exitcode==True: #exitcode
             print("------------Exit Program------------")
             break #break loop
