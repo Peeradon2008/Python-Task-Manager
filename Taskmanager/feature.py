@@ -12,8 +12,8 @@ class Accessjson:
     
     def access(self): #import data from json file
         with open(json_file) as f:
-            data = json.load(f)
-            return data
+            __data = json.load(f)
+            return __data
 class Feature(Accessjson): #have 6 feature
     def __init__(self,task_name):
         self.__data = super().access() #import json to temporary data
